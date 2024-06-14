@@ -18,9 +18,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python version
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v1
         with:
-          python-version: '3.9'
+          python-version: '3.12'
 
       - name: Create and start virtual environment
         run: |
@@ -50,7 +50,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # This is required for requesting the JWT
+      id-token: write #This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -61,10 +61,11 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0D98563411AA408FBF73EB831F62CB9C }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0D11493553AA408FBF73EB831F62CB9C }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_AE10282CB4894591A173BDD2DFEC5274 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_38C0F4EB0D3A428AA6D2DF7914B193B1 }}
 
